@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+     
+      <style>
+         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+         * {
+         box-sizing: border-box;
+         }
+         body {
+         margin: 0;
+         padding: 0;
+         background: #333333;
+         color: #ffffff;
+         font-family: 'Roboto', sans-serif;
+         font-size: 16px;
+         line-height: 24px;
+         }
+         #wrapper {
+         width: 100%;
+         max-width: 500px;
+         margin: 0 auto;
+         padding: 20px;
+         text-align: center;
+         }
+         #logo {
+         display: block;
+         width: 100%;
+         height: auto;
+         margin-bottom: 20px;
+         }
+         #logo img {
+         display: block;
+         width: 100%;
+         }
+         #textblock2 {
+         margin-bottom: 20px;
+         }
+         #preview-holder {
+         display: none; /* Anfangs unsichtbar */
+         width: 100%;
+         max-width: 250px;
+         height: 250px;
+         border: 1px solid #000000;
+         overflow: hidden;
+         position: relative;
+         margin: 0 auto;
+         }
+         #preview {
+         width: 100%;
+         height: 100%;
+         transform: scaleX(1) !important;
+         position: absolute;
+         top: 0;
+         left: 0;
+         }
+         #resultDiv {
+         font-size: 18px;
+         margin-top: 20px;
+         }
+         #startButton {
+         margin: 10px 0;
+         padding: 10px 20px;
+         background-color: #007BFF;
+         color: #fff;
+         border: none;
+         cursor: pointer;
+         margin: 0 auto;
+         }
+         #resultImage {
+         width: 200px;
+         height: 200px;
+         background-size: contain;
+         background-position:  center center;
+         background-repeat: no-repeat;
+         margin: 0 auto;
+         margin-top: 20px;
+         }
+         .descimage {
+         width: 100%;
+         height: auto;
+         }
+         .resultCode {
+         font-size: 13px;
+         line-height: 16px;
+         margin-bottom: 20px;
+         }
+         .resultFig {
+         font-size: 16px;
+         line-height: 20px;
+         font-weight: 900;
+         }
+         #brickworld {
+         margin-top: 20px;
+         font-size: 16px;
+         line-height: 20px;
+         font-weight: 900;
+         padding: 12px;
+         border: 2px solid #007BFF;
+         }
+         #brickworld a {
+         text-decoration: none;
+         color: #007BFF;
+         }
+         #footer {
+         margin-top: 40px;font-size: 14px;
+         line-height: 20px;
+         text-align: center;
+         margin-bottom: 20px;
+         }
+         #footer a {
+         text-decoration: none;
+         color: #007BFF;
+         }
+      </style>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-V6LBR75QQL"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         
+         gtag('config', 'G-V6LBR75QQL');
+      </script>
+   </head>
+   <body>
+      <div id="wrapper">
+        
+        <div id="preview-holder">
+            <video id="preview"></video>
+         </div>
+         <button id="startButton">Start Scanning</button>
+         <div id="resultDiv"></div>
+         <div id="resultImage"></div>
+      </div>
+      <div id="footer">
+         
+      </div>
+      <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+      <script>
+         const videoElement = document.getElementById('preview');
+         const startButton = document.getElementById('startButton');
+         const resultDiv = document.getElementById('resultDiv');
+         const resultImage = document.getElementById('resultImage');
+         const previewHolder = document.getElementById('preview-holder');
+         let selectedDeviceId;
+         
+         window.addEventListener('load', function () {
+             const codeReader = new ZXing.BrowserMultiFormatReader();
+         
+             codeReader.listVideoInputDevices()
+                 .then((videoInputDevices) => {
+                     selectedDeviceId = videoInputDevices[0].deviceId;
+         
+                     if (videoInputDevices.length >= 1) {
+                         const rearCamera = videoInputDevices.find(device => device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear'));
+                         if (rearCamera) {
+                             selectedDeviceId = rearCamera.deviceId;
+                         }
+                     }
+         
+                     startButton.addEventListener('click', () => {
+                         startScanning();
+                     });
+                 })
+                 .catch((err) => {
+                     console.error(err);
+                 });
+         });
+         
+         function startScanning() {
+             const codeReader = new ZXing.BrowserMultiFormatReader();
+             const formatsToRecognize = [ZXing.BarcodeFormat.DATA_MATRIX];
+         
+             codeReader.formats = formatsToRecognize;
+             startButton.style.display = 'none';
+             resultDiv.innerHTML = '<span class="resultScan">Scanning...</span>';
+         resultImage.style.backgroundImage = "none";
+         
+         
+             codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, (result, err) => {
+                 if (result && formatsToRecognize.includes(result.format)) {
+                     const scannedData = result.text;
+                     console.log(result);
+                     resultDiv.innerHTML = '<span class="resultCode">Code detected:<br/>' + scannedData + "</span>";
+                     sendQRCodeToServer(scannedData);
+                     codeReader.reset();
+                     previewHolder.style.display = 'none';
+                     startButton.style.display = 'block';
+                 }
+                 if (err && !(err instanceof ZXing.NotFoundException)) {
+                     console.error(err);
+                     resultDiv.innerHTML = 'Error: ' + err;
+                     startButton.style.display = 'block';
+                 }
+             });
+         
+             console.log(`Started continuous decode from camera with id ${selectedDeviceId}`);
+             previewHolder.style.display = 'block';
+         }
+         
+         function sendQRCodeToServer(qrCodeData) {
+             const xhr = new XMLHttpRequest();
+             const url = 'processing-script.php';
+         
+             xhr.open('POST', url, true);
+             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+         
+             xhr.onreadystatechange = function () {
+                 if (xhr.readyState === XMLHttpRequest.DONE) {
+                     if (xhr.status === 200) {
+                         console.log('Server response:', xhr.responseText);
+         gotData = JSON.parse(xhr.responseText);
+         if (gotData.message == "No match found") {
+         resultDiv.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code.</span>';
+         }
+         else {
+                         	resultDiv.innerHTML += '<br/><span class="resultFig">This box should contain:<br/>' + gotData.message + '</span>';
+         var newImg = "img/" + gotData.message.toLowerCase().replace(/\s/g, "") + ".jpg";
+         console.log(newImg);
+            resultImage.style.backgroundImage = "url(" + newImg + ")";
+         }
+                     } else {
+                         console.error('Error sending the Code:', xhr.status);
+                     }
+                 }
+             };
+         
+             const data = JSON.stringify({ qrCodeData });
+             xhr.send(data);
+         }
+      </script>
+   </body>
+</html>
