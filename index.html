@@ -7,7 +7,7 @@
       <meta name="description" content="Find Minifigure">
       <title>Fig Scanner | presented by Brick World</title>
       <meta property="og:title" content="Minifigure">
-      <meta property="og:description" content="Find Minifigure">
+      <meta property="og:description" content="Find Minifigures">
       <meta property="og:image" content="https://images.brickset.com/sets/large/71045-13.jpg">
       <style>
          @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
@@ -132,10 +132,10 @@
    </head>
    <body>
       <div id="wrapper">
-         <a href="https://fned.github.io/lego/" target="_blank" id="logo">
+         <a href="https://fned.github.io/lego/" target="_blank" id="logo"><strong>Farhan's Minifigures Hunt :D</strong> <br>
          <img src="https://images.brickset.com/sets/large/71045-13.jpg" alt="" />
          </a>
-         <div id="text">Find which mini figure is inside the box of series 25!</div><br>
+         <div id="text">Find which Minifigure is inside the box of series 25!</div><br>
          <img src="img/qrcodesstyle.png" alt="" class="descimage" />
          <div id="preview-holder">
             <video id="preview"></video>
@@ -194,7 +194,7 @@
                if (result && formatsToRecognize.includes(result.format)) {
                   const scannedData = result.text;
                   console.log(result);
-                  resultDiv.innerHTML = '<span class="resultCode">Code detected:<br/>' + scannedData + "</span>";
+                  resultDiv.innerHTML = '<span class="resultCode">Minifigure Data Matrix:<br/>' + scannedData + "</span>";
                   sendQRCodeToServer(scannedData);
                   codeReader.reset();
                   previewHolder.style.display = 'none';
@@ -227,13 +227,13 @@
                         resultDiv.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code.</span>';
                      }
                      else {
-                         	resultDiv.innerHTML += '<br/><span class="resultFig">This box should contain:<br/>' + gotData.message + '</span>';
-                           var newImg = "img/" + gotData.message.toLowerCase().replace(/\s/g, "") + ".jpg";
-                           console.log(newImg);
-                           resultImage.style.backgroundImage = "url(" + newImg + ")";
+                        resultDiv.innerHTML += '<br/><span class="resultFig">This box should contain:<br/>' + gotData.message + '</span>';
+                        var newImg = "img/" + gotData.message.toLowerCase().replace(/\s/g, "") + ".jpg";
+                        console.log(newImg);
+                        resultImage.style.backgroundImage = "url(" + newImg + ")";
                      }
                   } else {
-                         console.error('Error sending the Code:', xhr.status);
+                        console.error('Error sending the Code:', xhr.status);
                   }
                }
             };
