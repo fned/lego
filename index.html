@@ -182,6 +182,21 @@
          const previewHolder = document.getElementById('preview-holder');
          let selectedDeviceId;
          
+         const characters = {
+            "6471966": { name: 'Film Noir Detective', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472870": { name: 'Black Falcon Gamer Girl', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472871": { name: 'Vampire knight', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472867": { name: 'Sprinter', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472863": { name: 'Goatherd', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472862": { name: 'Mushroom Sprite', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472861": { name: 'Fitness Trainer', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472869": { name: 'Triceratops Costume Fan', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472864": { name: 'Harpy', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472865": { name: 'Train Kid', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472860": { name: 'Barbarian', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6472868": { name: 'Pet Groomer', link: 'https://fakhirshaheen.com/film_noir.jpg' }
+         };
+
          window.addEventListener('load', function () {
             const codeReader = new ZXing.BrowserMultiFormatReader();
          
@@ -218,9 +233,10 @@
             codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, (result, err) => {
                if (result && formatsToRecognize.includes(result.format)) {
                   const scannedData = result.text;
-                  console.log(result);
                   resultDiv.innerHTML = '<span class="resultCode">Minifigure Data Matrix:<br/>' + scannedData + "</span>";
-                  sendQRCodeToServer(scannedData);
+                  console.log('Decoded: ' + result.text + " --> " + scannedData);
+                  //sendQRCodeToServer(scannedData);
+                  displayCharacter(scannedData.substring(0, 7))
                   codeReader.reset();
                   previewHolder.style.display = 'none';
                   startButton.style.display = 'block';
@@ -236,6 +252,20 @@
             previewHolder.style.display = 'block';
          }
          
+        function displayCharacter(qrCode){
+            console.log("QR code is: --> ", qrCode);
+            var character = characters["6471966"];
+            console.log(character);
+            if (character) {
+               resultDiv.innerHTML += '<br/><span class="resultFig">This box should contain:<br/>' + character.name + '</span>';
+               resultImage.style.backgroundImage = "url(" + character.link + ")";
+            }
+            else {
+               resultDiv.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code.</span>';
+            }
+        }
+
+      /*
          function sendQRCodeToServer(qrCodeData) {
             const xhr = new XMLHttpRequest();
             const url = 'processing-script.php';
@@ -266,6 +296,8 @@
             const data = JSON.stringify({ qrCodeData });
             xhr.send(data);
          }
+         */
+
       </script>
    </body>
 </html>
