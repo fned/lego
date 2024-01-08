@@ -150,7 +150,7 @@
          let selectedDeviceId;
          let i = 1;
         
-         const charactersUS = {
+         const characters = {
             "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6471969": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
             "6471970": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
@@ -162,11 +162,9 @@
             "6471963": { name: 'Harpy', link: 'https://images.brickset.com/sets/large/71045-9.jpg' },
             "6471964": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
             "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
-            "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' }
-         };
-	/*
-		const charactersEU = {
-            "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
+            "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' },
+
+	    "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
             "6472871": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
             "6472867": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
@@ -177,9 +175,9 @@
             "6472864": { name: 'Harpy', link: 'https://images.brickset.com/sets/large/71045-9.jpg' },
             "6472865": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
             "6472860": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
-            "6472868": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' }
+            "6472868": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' } 
          };
-         */
+	
          window.addEventListener('load', function () {
             const codeReader = new ZXing.BrowserMultiFormatReader();
          
@@ -235,15 +233,15 @@
          }
          
         function displayCharacter(dataMatrix){
-            var character = charactersUS[dataMatrix];
+            var character = characters[dataMatrix];
             if (character) {			
-				resultDiv.id = "resultDiv" ;
-				resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
-				history.append(resultDiv); 
+		resultDiv.id = "resultDiv" ;
+		resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
+		history.append(resultDiv); 
 				   
-			   resultImage.id = "resultImage";
-			   resultImage.style.backgroundImage = "url(" + character.link + ")";
-			   history.append(resultImage);			
+		resultImage.id = "resultImage";
+		resultImage.style.backgroundImage = "url(" + character.link + ")";
+		history.append(resultImage);			
             }
             else {
                history.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code: </span>';
