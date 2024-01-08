@@ -77,11 +77,11 @@
          border: none;
          cursor: pointer;
          margin: 0 auto;
-	 font-weight: bold;
+		font-weight: bold;
          font-size: 23px;
          width: 60%;
-	 border-radius: 12px;
-	 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		border-radius: 12px;
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
          }
          #resultImage {
          width: 300px;
@@ -116,6 +116,7 @@
          text-decoration: none;
          color: #007BFF;
          }
+		
       </style>
      
    </head>
@@ -148,7 +149,7 @@
          const previewHolder = document.getElementById('preview-holder');
          let selectedDeviceId;
          let i = 1;
-         
+        
          const charactersUS = {
             "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6471969": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
@@ -208,8 +209,6 @@
          
             codeReader.formats = formatsToRecognize;
             startButton.style.display = 'none';
-            //resultDiv.innerHTML = '<span class="resultScan">Scanning...</span>';
-            //resultImage.style.backgroundImage = "none";
            
             codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, (result, err) => {
                if (result && formatsToRecognize.includes(result.format)) {
@@ -237,20 +236,19 @@
          
         function displayCharacter(dataMatrix){
             var character = charactersUS[dataMatrix];
-            console.log("character: " + character.name);
             if (character) {			
-		resultDiv.id = "resultDiv" ;
-		resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
-		history.append(resultDiv); 
-               
-               resultImage.id = "resultImage";
-               resultImage.style.backgroundImage = "url(" + character.link + ")";
-               history.append(resultImage);
-               i++;
+				resultDiv.id = "resultDiv" ;
+				resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
+				history.append(resultDiv); 
+				   
+			   resultImage.id = "resultImage";
+			   resultImage.style.backgroundImage = "url(" + character.link + ")";
+			   history.append(resultImage);			
             }
             else {
-               history.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code.</span>';
+               history.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code: </span>';
             }
+            i++;
         }
       </script>
    </body>
