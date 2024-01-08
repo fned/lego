@@ -140,7 +140,7 @@
          <div id="preview-holder">
             <video id="preview"></video>
          </div>
-         <button id="startButton">Start Scanning</button>
+         <button id="startButton">Scan Minifigure box Data Matrix</button>
          
          <div id="resultDiv"></div>
          <div id="resultImage"></div>
@@ -149,32 +149,8 @@
          
       </div>
 
-      <!--
-
-      let text = "Hello world!";
-      let result = text.substring(0, 7);
-
-      console.log(result);
-      
-    ⁠⁠ 6472866, Film Noir Detective, https://images.brickset.com/sets/large/71045-1.jpg
-    ⁠⁠ 6472870 - Black Falcon Gamer Girl
-    ⁠⁠ 6472871 - Vampire knight
-    ⁠⁠ 6472867 - Sprinter
-    ⁠⁠ 6472863 - Goatherd
-    ⁠⁠ 6472862 - Mushroom Sprite
-    ⁠⁠ 6472861 - Fitness Trainer
-    ⁠⁠ 6472869 - Triceratops Costume Fan
-    ⁠⁠ 6472864 - Harpy
-   ⁠  6472865 - Train Kid
-     6472860 - Barbarian
-    ⁠ 6472868 - Pet Groomer
-
-
-      -->
-      
       <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
       <script>
-         const array = []
          const videoElement = document.getElementById('preview');
          const startButton = document.getElementById('startButton');
          const resultDiv = document.getElementById('resultDiv');
@@ -182,21 +158,36 @@
          const previewHolder = document.getElementById('preview-holder');
          let selectedDeviceId;
          
-         const characters = {
-            "6471966": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
-            "6472870": { name: 'Black Falcon Gamer Girl', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472871": { name: 'Vampire knight', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472867": { name: 'Sprinter', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472863": { name: 'Goatherd', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472862": { name: 'Mushroom Sprite', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472861": { name: 'Fitness Trainer', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472869": { name: 'Triceratops Costume Fan', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472864": { name: 'Harpy', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472865": { name: 'Train Kid', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472860": { name: 'Barbarian', link: 'https://fakhirshaheen.com/film_noir.jpg' },
-            "6472868": { name: 'Pet Groomer', link: 'https://fakhirshaheen.com/film_noir.jpg' }
+         const charactersUS = {
+            "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
+            "6471969": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
+            "6471970": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
+            "6471966": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
+            "6471962": { name: 'Goatherd', link: 'https://images.brickset.com/sets/large/71045-5.jpg' },
+            "6471961": { name: 'Mushroom Sprite', link: 'https://images.brickset.com/sets/large/71045-6.jpg' },
+            "6471960": { name: 'Fitness Instructor', link: 'https://images.brickset.com/sets/large/71045-7.jpg' },
+            "6471968": { name: 'Triceratops Costume Fan', link: 'https://images.brickset.com/sets/large/71045-8.jpg' },
+            "6471963": { name: 'Harpy', link: 'https://images.brickset.com/sets/large/71045-9.jpg' },
+            "6471964": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
+            "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
+            "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' }
          };
-
+		/*
+		const charactersEU = {
+            "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
+            "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
+            "6472871": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
+            "6472867": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
+            "6472863": { name: 'Goatherd', link: 'https://images.brickset.com/sets/large/71045-5.jpg' },
+            "6472862": { name: 'Mushroom Sprite', link: 'https://images.brickset.com/sets/large/71045-6.jpg' },
+            "6472861": { name: 'Fitness Instructor', link: 'https://images.brickset.com/sets/large/71045-7.jpg' },
+            "6472869": { name: 'Triceratops Costume Fan', link: 'https://images.brickset.com/sets/large/71045-8.jpg' },
+            "6472864": { name: 'Harpy', link: 'https://images.brickset.com/sets/large/71045-9.jpg' },
+            "6472865": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
+            "6472860": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
+            "6472868": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' }
+         };
+         */
          window.addEventListener('load', function () {
             const codeReader = new ZXing.BrowserMultiFormatReader();
          
@@ -226,16 +217,15 @@
          
             codeReader.formats = formatsToRecognize;
             startButton.style.display = 'none';
-            resultDiv.innerHTML = '<span class="resultScan">Scanning...</span>';
-            resultImage.style.backgroundImage = "none";
+            //resultDiv.innerHTML = '<span class="resultScan">Scanning...</span>';
+            //resultImage.style.backgroundImage = "none";
          
          
             codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, (result, err) => {
                if (result && formatsToRecognize.includes(result.format)) {
                   const scannedData = result.text;
-                  resultDiv.innerHTML = '<span class="resultCode">Minifigure Data Matrix:<br/>' + scannedData + "</span>";
+                  resultDiv.innerHTML += '<br/><span class="resultCode">Minifigure Data Matrix:<br/>' + scannedData + "</span><br/>";
                   console.log('Decoded: ' + result.text + " --> " + scannedData);
-                  //sendQRCodeToServer(scannedData);
                   displayCharacter(scannedData.substring(0, 7))
                   codeReader.reset();
                   previewHolder.style.display = 'none';
@@ -243,7 +233,7 @@
                }
                if (err && !(err instanceof ZXing.NotFoundException)) {
                   console.error(err);
-                  resultDiv.innerHTML = 'Error: ' + err;
+                  resultDiv.innerHTML += 'Error: ' + err;
                   startButton.style.display = 'block';
                }
             });
@@ -253,50 +243,17 @@
          }
          
         function displayCharacter(dataMatrix){
-            var character = characters[dataMatrix];
+            var character = charactersUS[dataMatrix];
             console.log(character);
             if (character) {
-               resultDiv.innerHTML += '<br/><span class="resultFig">This box should contain:<br/>' + character.name + '</span>';
+               resultDiv.innerHTML += '<br/><span class="resultFig">This box has:<br/>' + character.name + '</span>';
+               resultImage.innerHTML += '<div class="imgfig"></div>';
                resultImage.style.backgroundImage = "url(" + character.link + ")";
             }
             else {
                resultDiv.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code.</span>';
             }
         }
-
-      /*
-         function sendQRCodeToServer(qrCodeData) {
-            const xhr = new XMLHttpRequest();
-            const url = 'processing-script.php';
-         
-            xhr.open('POST', url, true);
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-         
-            xhr.onreadystatechange = function () {
-               if (xhr.readyState === XMLHttpRequest.DONE) {
-                  if (xhr.status === 200) {
-                     console.log('Server response:', xhr.responseText);
-                     gotData = JSON.parse(xhr.responseText);
-                     if (gotData.message == "No match found") {
-                        resultDiv.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code.</span>';
-                     }
-                     else {
-                        resultDiv.innerHTML += '<br/><span class="resultFig">This box should contain:<br/>' + gotData.message + '</span>';
-                        var newImg = "img/" + gotData.message.toLowerCase().replace(/\s/g, "") + ".jpg";
-                        console.log(newImg);
-                        resultImage.style.backgroundImage = "url(" + newImg + ")";
-                     }
-                  } else {
-                        console.error('Error sending the Code:', xhr.status);
-                  }
-               }
-            };
-         
-            const data = JSON.stringify({ qrCodeData });
-            xhr.send(data);
-         }
-         */
-
       </script>
    </body>
 </html>
