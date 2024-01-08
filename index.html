@@ -253,8 +253,7 @@
          }
          
         function displayCharacter(qrCode){
-            console.log("QR code is: --> ", qrCode);
-            var character = characters["6471966"];
+            var character = characters[qrCode];
             console.log(character);
             if (character) {
                resultDiv.innerHTML += '<br/><span class="resultFig">This box should contain:<br/>' + character.name + '</span>';
