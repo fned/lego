@@ -183,7 +183,7 @@
          let selectedDeviceId;
          
          const characters = {
-            "6471966": { name: 'Film Noir Detective', link: 'https://fakhirshaheen.com/film_noir.jpg' },
+            "6471966": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6472870": { name: 'Black Falcon Gamer Girl', link: 'https://fakhirshaheen.com/film_noir.jpg' },
             "6472871": { name: 'Vampire knight', link: 'https://fakhirshaheen.com/film_noir.jpg' },
             "6472867": { name: 'Sprinter', link: 'https://fakhirshaheen.com/film_noir.jpg' },
@@ -252,8 +252,8 @@
             previewHolder.style.display = 'block';
          }
          
-        function displayCharacter(qrCode){
-            var character = characters[qrCode];
+        function displayCharacter(dataMatrix){
+            var character = characters[dataMatrix];
             console.log(character);
             if (character) {
                resultDiv.innerHTML += '<br/><span class="resultFig">This box should contain:<br/>' + character.name + '</span>';
