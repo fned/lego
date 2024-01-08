@@ -6,9 +6,9 @@
       <meta name="author" content="">
       <meta name="description" content="Find Minifigure">
       <title>Well hello there :D</title>
-      <meta property="og:title" content="Minifigure">
+      <meta property="og:title" content="Find Minifigure">
       <meta property="og:description" content="Find Minifigures">
-      <meta property="og:image" content="https://images.brickset.com/sets/large/71045-13.jpg">
+      
       <style>
          @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
          * {
@@ -17,8 +17,8 @@
          body {
          margin: 0;
          padding: 0;
-         background: #333333;
-         color: #ffffff;
+         background: #ffffff;
+         color: #000000;
          font-family: 'Roboto', sans-serif;
          font-size: 16px;
          line-height: 24px;
@@ -61,9 +61,13 @@
          top: 0;
          left: 0;
          }
-         #resultDiv {
+         #history {
          font-size: 18px;
          margin-top: 20px;
+         }
+         #resultDiv {
+         font-size: 18px;
+ 
          }
          #startButton {
          margin: 10px 0;
@@ -95,7 +99,7 @@
          .resultFig {
          font-size: 16px;
          line-height: 20px;
-         font-weight: 900;
+         
          }
          #brickworld {
          margin-top: 20px;
@@ -120,43 +124,37 @@
          color: #007BFF;
          }
       </style>
-      <!-- Google tag (gtag.js) -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-V6LBR75QQL"></script>
-      <script>
-         window.dataLayer = window.dataLayer || [];
-         function gtag(){dataLayer.push(arguments);}
-         gtag('js', new Date());
-         
-         gtag('config', 'G-V6LBR75QQL');
-      </script>
+     
    </head>
    <body>
       <div id="wrapper">
-         <a href="https://fned.github.io/lego/" target="_blank" id="logo"><strong>Farhan's Minifigures Hunt :D</strong> <br> <br>
-         <img src="https://images.brickset.com/sets/large/71045-13.jpg" alt="" />
-         </a>
-         <div id="text">Find which Minifigure is inside the box of series 25!</div><br>
+		<div><strong>Farhan's Minifigures Hunt (Series 25)</strong> <br> <br></div>
+        <div id="logo"><img src="https://images.brickset.com/sets/large/71045-13.jpg"></div>
+    
+         <div id="text">Find which Minifigure is inside the box of series 25!</div>
          <img src="img/qrcodesstyle.png" alt="" class="descimage" />
          <div id="preview-holder">
             <video id="preview"></video>
          </div>
          <button id="startButton">Scan Minifigure box Data Matrix</button>
          
-         <div id="resultDiv"></div>
-         <div id="resultImage"></div>
+		<div id="history"></div>
       </div>
+      
       <div id="footer">
-         
+      
       </div>
 
       <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
       <script>
          const videoElement = document.getElementById('preview');
          const startButton = document.getElementById('startButton');
-         const resultDiv = document.getElementById('resultDiv');
-         const resultImage = document.getElementById('resultImage');
+         const resultDiv = document.createElement("div");
+         const resultImage = document.createElement('div'); 
+         const history = document.getElementById('history');
          const previewHolder = document.getElementById('preview-holder');
          let selectedDeviceId;
+         let i = 1;
          
          const charactersUS = {
             "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
@@ -219,12 +217,14 @@
             startButton.style.display = 'none';
             //resultDiv.innerHTML = '<span class="resultScan">Scanning...</span>';
             //resultImage.style.backgroundImage = "none";
-         
-         
+           
             codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, (result, err) => {
                if (result && formatsToRecognize.includes(result.format)) {
                   const scannedData = result.text;
-                  resultDiv.innerHTML += '<br/><span class="resultCode">Minifigure Data Matrix:<br/>' + scannedData + "</span><br/>";
+                  
+                  history.innerHTML += '<br/>-----------------------------------&emsp; ' + i +' &emsp;-----------------------------------';
+                  
+                  history.innerHTML += '<br/><span class="resultCode">Minifigure Data Matrix: <span style="color:green;font-weight:bold;background-color:#ffffff">' + scannedData.substring(0, 7) + "</span></span>";
                   console.log('Decoded: ' + result.text + " --> " + scannedData);
                   displayCharacter(scannedData.substring(0, 7))
                   codeReader.reset();
@@ -233,7 +233,7 @@
                }
                if (err && !(err instanceof ZXing.NotFoundException)) {
                   console.error(err);
-                  resultDiv.innerHTML += 'Error: ' + err;
+                  history.innerHTML += 'Error: ' + err;
                   startButton.style.display = 'block';
                }
             });
@@ -244,14 +244,19 @@
          
         function displayCharacter(dataMatrix){
             var character = charactersUS[dataMatrix];
-            console.log(character);
-            if (character) {
-               resultDiv.innerHTML += '<br/><span class="resultFig">This box has:<br/>' + character.name + '</span>';
-               resultImage.innerHTML += '<div class="imgfig"></div>';
+            console.log("character: " + character.name);
+            if (character) {			
+				resultDiv.id = "resultDiv" ;
+				resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
+				history.append(resultDiv); 
+               
+               resultImage.id = "resultImage";
                resultImage.style.backgroundImage = "url(" + character.link + ")";
+               history.append(resultImage);
+               i++;
             }
             else {
-               resultDiv.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code.</span>';
+               history.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code.</span>';
             }
         }
       </script>
