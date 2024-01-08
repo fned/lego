@@ -46,8 +46,8 @@
          #preview-holder {
          display: none; /* Anfangs unsichtbar */
          width: 100%;
-         max-width: 250px;
-         height: 250px;
+         max-width: 500px;
+         height: 500px;
          border: 1px solid #000000;
          overflow: hidden;
          position: relative;
@@ -72,11 +72,14 @@
          #startButton {
          margin: 10px 0;
          padding: 10px 20px;
-         background-color: #007BFF;
+         background-color: #009933;
          color: #fff;
          border: none;
          cursor: pointer;
          margin: 0 auto;
+	 font-weight: bold;
+         font-size: 23px;
+         width: 50%;
          }
          #resultImage {
          width: 200px;
@@ -101,18 +104,6 @@
          line-height: 20px;
          
          }
-         #brickworld {
-         margin-top: 20px;
-         font-size: 16px;
-         line-height: 20px;
-         font-weight: 900;
-         padding: 12px;
-         border: 2px solid #007BFF;
-         }
-         #brickworld a {
-         text-decoration: none;
-         color: #007BFF;
-         }
          #footer {
          margin-top: 40px;font-size: 14px;
          line-height: 20px;
@@ -128,7 +119,7 @@
    </head>
    <body>
       <div id="wrapper">
-		<div><strong>Farhan's Minifigures Hunt (Series 25)</strong> <br> <br></div>
+	<div><strong>Farhan's Minifigures Hunt (Series 25)</strong> <br> <br></div>
         <div id="logo"><img src="https://images.brickset.com/sets/large/71045-13.jpg"></div>
     
          <div id="text">Find which Minifigure is inside the box of series 25!</div>
@@ -138,7 +129,7 @@
          </div>
          <button id="startButton">Scan Minifigure box Data Matrix</button>
          
-		<div id="history"></div>
+	<div id="history"></div>
       </div>
       
       <div id="footer">
@@ -170,7 +161,7 @@
             "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
             "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' }
          };
-		/*
+	/*
 		const charactersEU = {
             "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
@@ -246,9 +237,9 @@
             var character = charactersUS[dataMatrix];
             console.log("character: " + character.name);
             if (character) {			
-				resultDiv.id = "resultDiv" ;
-				resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
-				history.append(resultDiv); 
+		resultDiv.id = "resultDiv" ;
+		resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
+		history.append(resultDiv); 
                
                resultImage.id = "resultImage";
                resultImage.style.backgroundImage = "url(" + character.link + ")";
