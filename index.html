@@ -145,8 +145,8 @@
       .switch {
          position: relative;
          display: inline-block;
-         width: 60px;
-         height: 34px;
+         width: 50px;
+         height: 26px;
       }
 
       .switch input {
@@ -170,10 +170,10 @@
       .slider:before {
          position: absolute;
          content: "";
-         height: 26px;
-         width: 26px;
-         left: 4px;
-         bottom: 4px;
+         height: 20px;
+         width: 20px;
+         left: 5px;
+         bottom: 3px;
          background-color: white;
          -webkit-transition: .4s;
          transition: .4s;
@@ -188,9 +188,9 @@
       }
 
       input:checked+.slider:before {
-         -webkit-transform: translateX(26px);
-         -ms-transform: translateX(26px);
-         transform: translateX(26px);
+         -webkit-transform: translateX(20px);
+         -ms-transform: translateX(20px);
+         transform: translateX(20px);
       }
 
       /* Rounded sliders */
@@ -227,7 +227,8 @@
          <video id="preview"></video>
       </div>
       <button id="startButton">Scan Minifigure box Data Matrix</button>
-      <div style="font-size:18px"><br> History mode:
+      <div><br></div>
+      <div style="font-size:18px">History mode:
          <label class="switch">
             <input id="cbox" type="checkbox" onchange="toggleCheckbox(this)" checked>
             <span class="slider round"></span>
