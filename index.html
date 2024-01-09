@@ -82,11 +82,11 @@
          border: none;
          cursor: pointer;
          margin: 0 auto;
-		font-weight: bold;
+		    font-weight: bold;
          font-size: 23px;
          width: 60%;
-		border-radius: 12px;
-		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		    border-radius: 12px;
+		    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
          }
          #resultImage {
          width: 300px;
@@ -121,19 +121,19 @@
          text-decoration: none;
          color: #007BFF;
          }
-         
+     
         .switch {
-		  position: relative;
-		  display: inline-block;
-		  width: 60px;
-		  height: 34px;
-		}
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        }
 
-		.switch input { 
-		  opacity: 0;
-		  width: 0;
-		  height: 0;
-		}
+      .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
 
 		.slider {
 		  position: absolute;
@@ -215,19 +215,20 @@
          const resultDiv = document.createElement("div");
          const resultImage = document.createElement('div'); 
          const history = document.getElementById('history');
-	const res = document.getElementById('res');
+
+	      const res = document.getElementById('res');
          const previewHolder = document.getElementById('preview-holder');
          let selectedDeviceId;
          let i = 1;
          let flag = document.getElementById("cbox").checked;
          
         function toggleCheckbox(element)
-	 {
-	   //element.checked = !element.checked;
-	   flag = element.checked;
-	   console.log('Toggle: ' + element.checked);
-	   console.log('flag: ' + flag);
-	 }
+         {
+           //element.checked = !element.checked;
+           flag = element.checked;
+           console.log('Toggle: ' + element.checked);
+           console.log('flag: ' + flag);
+         }
 		 
 		 
         function clearcontent(elementID) { 
@@ -235,6 +236,7 @@
             console.log('clearcontent: ' + elementID);
             i = 1;
         } 
+
          const characters = {
             "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6471969": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
@@ -249,7 +251,7 @@
             "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
             "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' },
 
-			"6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
+			      "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
             "6472871": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
             "6472867": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
@@ -321,14 +323,15 @@
         function displayCharacter(dataMatrix){
             var character = characters[dataMatrix];
             if (character) {			
-		resultDiv.id = "resultDiv" ;
-		resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
-		res.innerHTML = character.name;
-		history.append(resultDiv); 
-				   
-		resultImage.id = "resultImage";
-		resultImage.style.backgroundImage = "url(" + character.link + ")";
-		history.append(resultImage);							
+                resultDiv.id = "resultDiv" ;
+                resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
+                res.innerHTML = character.name;
+                history.append(resultDiv); 
+
+                resultImage.id = "resultImage";
+                resultImage.style.backgroundImage = "url(" + character.link + ")";
+                history.append(resultImage);							
+
             }
             else {
                history.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code: </span>';
