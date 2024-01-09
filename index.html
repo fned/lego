@@ -332,7 +332,7 @@
             if (result && formatsToRecognize.includes(result.format)) {
                const scannedData = result.text;
 
-               history.innerHTML += '<br/>----------------------&emsp; ' + i +' &emsp;----------------------';
+               history.innerHTML += '<br/>-------------------&emsp; ' + i +' &emsp;-------------------';
 
                history.innerHTML += '<br/><span class="resultCode">Minifigure Data Matrix: <span style="color:green;font-weight:bold;background-color:#ffffff">' + scannedData.substring(0, 7) + "</span></span>";
                //console.log('Decoded: ' + result.text + " --> " + scannedData);
