@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="author" content="">
-      <meta name="description" content="Find Minifigure">
-      <title>Well hello there...</title>
-      <meta property="og:title" content="Find Minifigure">
-      <meta property="og:description" content="Find Minifigures">
-      
-      <style>
-         @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-         * {
+
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="author" content="">
+   <meta name="description" content="Find Minifigure">
+   <title>Well hello there...</title>
+   <meta property="og:title" content="Find Minifigure">
+   <meta property="og:description" content="Find Minifigures">
+
+   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+      * {
          box-sizing: border-box;
-         }
-         body {
+      }
+
+      body {
          margin: 0;
          padding: 0;
          background: #ffffff;
@@ -22,29 +25,35 @@
          font-family: 'Roboto', sans-serif;
          font-size: 16px;
          line-height: 24px;
-         }
-         #wrapper {
+      }
+
+      #wrapper {
          width: 100%;
          max-width: 500px;
          margin: 0 auto;
          padding: 20px;
          text-align: center;
-         }
-         #logo {
+      }
+
+      #logo {
          display: block;
          width: 100%;
          height: auto;
          margin-bottom: 20px;
-         }
-         #logo img {
+      }
+
+      #logo img {
          display: block;
          width: 100%;
-         }
-         #textblock2 {
+      }
+
+      #textblock2 {
          margin-bottom: 20px;
-         }
-         #preview-holder {
-         display: none; /* Anfangs unsichtbar */
+      }
+
+      #preview-holder {
+         display: none;
+         /* Anfangs unsichtbar */
          width: 100%;
          max-width: 500px;
          height: 500px;
@@ -52,29 +61,34 @@
          overflow: hidden;
          position: relative;
          margin: 0 auto;
-         }
-         #preview {
+      }
+
+      #preview {
          width: 100%;
          height: 100%;
          transform: scaleX(1) !important;
          position: absolute;
          top: 0;
          left: 0;
-         }
-         #res{
+      }
+
+      #res {
          border-left-style: solid;
          border-color: #2196F3;
          background: #DDFFFF;
-         }
-         #history {
+      }
+
+      #history {
          font-size: 18px;
          margin-top: 20px;
-         }
-         #resultDiv {
+      }
+
+      #resultDiv {
          font-size: 18px;
- 
-         }
-         #startButton {
+
+      }
+
+      #startButton {
          margin: 10px 0;
          padding: 10px 20px;
          background-color: #009933;
@@ -82,262 +96,271 @@
          border: none;
          cursor: pointer;
          margin: 0 auto;
-		    font-weight: bold;
+         font-weight: bold;
          font-size: 23px;
          width: 60%;
-		    border-radius: 12px;
-		    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-         }
-         #resultImage {
+         border-radius: 12px;
+         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      }
+
+      #resultImage {
          width: 300px;
          height: 300px;
          background-size: contain;
-         background-position:  center center;
+         background-position: center center;
          background-repeat: no-repeat;
          margin: 0 auto;
          margin-top: 20px;
-         }
-         .descimage {
+      }
+
+      .descimage {
          width: 100%;
          height: auto;
-         }
-         .resultCode {
+      }
+
+      .resultCode {
          font-size: 13px;
          line-height: 16px;
          margin-bottom: 20px;
-         }
-         .resultFig {
+      }
+
+      .resultFig {
          font-size: 16px;
          line-height: 20px;
-         
-         }
-         #footer {
-         margin-top: 40px;font-size: 14px;
+
+      }
+
+      #footer {
+         margin-top: 40px;
+         font-size: 14px;
          line-height: 20px;
          text-align: center;
          margin-bottom: 20px;
-         }
-         #footer a {
-         text-decoration: none;
-         color: #007BFF;
-         }
-     
-        .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-        }
-
-      .switch input { 
-        opacity: 0;
-        width: 0;
-        height: 0;
       }
 
-		.slider {
-		  position: absolute;
-		  cursor: pointer;
-		  top: 0;
-		  left: 0;
-		  right: 0;
-		  bottom: 0;
-		  background-color: #ccc;
-		  -webkit-transition: .4s;
-		  transition: .4s;
-		}
+      #footer a {
+         text-decoration: none;
+         color: #007BFF;
+      }
 
-		.slider:before {
-		  position: absolute;
-		  content: "";
-		  height: 26px;
-		  width: 26px;
-		  left: 4px;
-		  bottom: 4px;
-		  background-color: white;
-		  -webkit-transition: .4s;
-		  transition: .4s;
-		}
+      .switch {
+         position: relative;
+         display: inline-block;
+         width: 60px;
+         height: 34px;
+      }
 
-		input:checked + .slider {
-		  background-color: #2196F3;
-		}
+      .switch input {
+         opacity: 0;
+         width: 0;
+         height: 0;
+      }
 
-		input:focus + .slider {
-		  box-shadow: 0 0 1px #2196F3;
-		}
+      .slider {
+         position: absolute;
+         cursor: pointer;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background-color: #ccc;
+         -webkit-transition: .4s;
+         transition: .4s;
+      }
 
-		input:checked + .slider:before {
-		  -webkit-transform: translateX(26px);
-		  -ms-transform: translateX(26px);
-		  transform: translateX(26px);
-		}
+      .slider:before {
+         position: absolute;
+         content: "";
+         height: 26px;
+         width: 26px;
+         left: 4px;
+         bottom: 4px;
+         background-color: white;
+         -webkit-transition: .4s;
+         transition: .4s;
+      }
 
-		/* Rounded sliders */
-		.slider.round {
-		  border-radius: 34px;
-		}
+      input:checked+.slider {
+         background-color: #2196F3;
+      }
 
-		.slider.round:before {
-		  border-radius: 50%;
-		}
-      </style>
-     
-   </head>
-    <body>
-      <div id="wrapper">
-		<div><strong>Farhan's Minifigures Hunt (Series 25)</strong> <br> <br></div>
-        <div id="logo"><img src="https://images.brickset.com/sets/large/71045-13.jpg"></div>
-    
-         <div id="res">Find which Minifigure is inside the box of series 25!</div>
-         <img src="img/qrcodesstyle.png" alt="" class="descimage" />
-         <div id="preview-holder">
-            <video id="preview"></video>
-         </div>
-         <button id="startButton">Scan Minifigure box Data Matrix</button>
-         <div style="font-size:18px"><br> History mode: 
-        	<label class="switch">
-				<input id ="cbox" type="checkbox" onchange="toggleCheckbox(this)" checked>
-				<span class="slider round"></span>
-			</label>
-		</div>
-	<div id="history"></div>
+      input:focus+.slider {
+         box-shadow: 0 0 1px #2196F3;
+      }
+
+      input:checked+.slider:before {
+         -webkit-transform: translateX(26px);
+         -ms-transform: translateX(26px);
+         transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+         border-radius: 34px;
+      }
+
+      .slider.round:before {
+         border-radius: 50%;
+      }
+   </style>
+
+</head>
+
+<body>
+   <div id="wrapper">
+      <div><strong>Farhan's Minifigures Hunt (Series 25)</strong> <br> <br></div>
+      <div id="logo"><img src="https://images.brickset.com/sets/large/71045-13.jpg"></div>
+
+      <div id="res">Find which Minifigure is inside the box of series 25!</div>
+      <img src="img/qrcodesstyle.png" alt="" class="descimage" />
+      <div id="preview-holder">
+         <video id="preview"></video>
       </div>
-      
-      <div id="footer">
-      
+      <button id="startButton">Scan Minifigure box Data Matrix</button>
+      <div style="font-size:18px"><br> History mode:
+         <label class="switch">
+            <input id="cbox" type="checkbox" onchange="toggleCheckbox(this)" checked>
+            <span class="slider round"></span>
+         </label>
       </div>
+      <div id="history"></div>
+   </div>
 
-      <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
-      <script>
-         const videoElement = document.getElementById('preview');
-         const startButton = document.getElementById('startButton');
-         const resultDiv = document.createElement("div");
-         const resultImage = document.createElement('div'); 
-         const history = document.getElementById('history');
+   <div id="footer">
 
-	      const res = document.getElementById('res');
-         const previewHolder = document.getElementById('preview-holder');
-         let selectedDeviceId;
-         let i = 1;
-         let flag = document.getElementById("cbox").checked;
-         
-        function toggleCheckbox(element)
-         {
-           //element.checked = !element.checked;
-           flag = element.checked;
-           console.log('Toggle: ' + element.checked);
-           console.log('flag: ' + flag);
-         }
-		 
-		 
-        function clearcontent(elementID) { 
-            document.getElementById(elementID).innerHTML = ""; 
-            console.log('clearcontent: ' + elementID);
-            i = 1;
-        } 
+   </div>
 
-         const characters = {
-            "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
-            "6471969": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
-            "6471970": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
-            "6471966": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
-            "6471962": { name: 'Goatherd', link: 'https://images.brickset.com/sets/large/71045-5.jpg' },
-            "6471961": { name: 'Mushroom Sprite', link: 'https://images.brickset.com/sets/large/71045-6.jpg' },
-            "6471960": { name: 'Fitness Instructor', link: 'https://images.brickset.com/sets/large/71045-7.jpg' },
-            "6471968": { name: 'Triceratops Costume Fan', link: 'https://images.brickset.com/sets/large/71045-8.jpg' },
-            "6471963": { name: 'Harpy', link: 'https://images.brickset.com/sets/large/71045-9.jpg' },
-            "6471964": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
-            "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
-            "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' },
+   <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest/umd/index.min.js"></script>
+   <script>
+      const videoElement = document.getElementById('preview');
+      const startButton = document.getElementById('startButton');
+      const resultDiv = document.createElement("div");
+      const resultImage = document.createElement('div');
+      const history = document.getElementById('history');
 
-			      "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
-            "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
-            "6472871": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
-            "6472867": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
-            "6472863": { name: 'Goatherd', link: 'https://images.brickset.com/sets/large/71045-5.jpg' },
-            "6472862": { name: 'Mushroom Sprite', link: 'https://images.brickset.com/sets/large/71045-6.jpg' },
-            "6472861": { name: 'Fitness Instructor', link: 'https://images.brickset.com/sets/large/71045-7.jpg' },
-            "6472869": { name: 'Triceratops Costume Fan', link: 'https://images.brickset.com/sets/large/71045-8.jpg' },
-            "6472864": { name: 'Harpy', link: 'https://images.brickset.com/sets/large/71045-9.jpg' },
-            "6472865": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
-            "6472860": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
-            "6472868": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' } 
-         };
-	
-         window.addEventListener('load', function () {
-            const codeReader = new ZXing.BrowserMultiFormatReader();
-         
-            codeReader.listVideoInputDevices()
-               .then((videoInputDevices) => {
-                  selectedDeviceId = videoInputDevices[0].deviceId;
-         
-                  if (videoInputDevices.length >= 1) {
-                     const rearCamera = videoInputDevices.find(device => device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear'));
-                     if (rearCamera) {
-                        selectedDeviceId = rearCamera.deviceId;
-                     }
+      const res = document.getElementById('res');
+      const previewHolder = document.getElementById('preview-holder');
+      let selectedDeviceId;
+      let i = 1;
+      let flag = document.getElementById("cbox").checked;
+
+      function toggleCheckbox(element) {
+         //element.checked = !element.checked;
+         flag = element.checked;
+         //console.log('Toggle: ' + element.checked);
+         //console.log('flag: ' + flag);
+      }
+
+
+      function clearcontent(elementID) {
+         document.getElementById(elementID).innerHTML = "";
+         //console.log('clearcontent: ' + elementID);
+         i = 1;
+      }
+
+      const characters = {
+         "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
+         "6471969": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
+         "6471970": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
+         "6471966": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
+         "6471962": { name: 'Goatherd', link: 'https://images.brickset.com/sets/large/71045-5.jpg' },
+         "6471961": { name: 'Mushroom Sprite', link: 'https://images.brickset.com/sets/large/71045-6.jpg' },
+         "6471960": { name: 'Fitness Instructor', link: 'https://images.brickset.com/sets/large/71045-7.jpg' },
+         "6471968": { name: 'Triceratops Costume Fan', link: 'https://images.brickset.com/sets/large/71045-8.jpg' },
+         "6471963": { name: 'Harpy', link: 'https://images.brickset.com/sets/large/71045-9.jpg' },
+         "6471964": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
+         "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
+         "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' },
+
+         "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
+         "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
+         "6472871": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
+         "6472867": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
+         "6472863": { name: 'Goatherd', link: 'https://images.brickset.com/sets/large/71045-5.jpg' },
+         "6472862": { name: 'Mushroom Sprite', link: 'https://images.brickset.com/sets/large/71045-6.jpg' },
+         "6472861": { name: 'Fitness Instructor', link: 'https://images.brickset.com/sets/large/71045-7.jpg' },
+         "6472869": { name: 'Triceratops Costume Fan', link: 'https://images.brickset.com/sets/large/71045-8.jpg' },
+         "6472864": { name: 'Harpy', link: 'https://images.brickset.com/sets/large/71045-9.jpg' },
+         "6472865": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
+         "6472860": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
+         "6472868": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' }
+      };
+
+      window.addEventListener('load', function () {
+         const codeReader = new ZXing.BrowserMultiFormatReader();
+
+         codeReader.listVideoInputDevices()
+            .then((videoInputDevices) => {
+               selectedDeviceId = videoInputDevices[0].deviceId;
+
+               if (videoInputDevices.length >= 1) {
+                  const rearCamera = videoInputDevices.find(device => device.label.toLowerCase().includes('back') || device.label.toLowerCase().includes('rear'));
+                  if (rearCamera) {
+                     selectedDeviceId = rearCamera.deviceId;
                   }
-         
-                  startButton.addEventListener('click', () => {
-                     startScanning();
-                  });
-               })
-               .catch((err) => {
-                  console.error(err);
+               }
+
+               startButton.addEventListener('click', () => {
+                  startScanning();
                });
-         });
-         
-         function startScanning() {
-            const codeReader = new ZXing.BrowserMultiFormatReader();
-            const formatsToRecognize = [ZXing.BarcodeFormat.DATA_MATRIX];
-		if(flag == false){clearcontent('history');
-		}
-            codeReader.formats = formatsToRecognize;
-            startButton.style.display = 'none';
-           
-            codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, (result, err) => {
-               if (result && formatsToRecognize.includes(result.format)) {
-                  const scannedData = result.text;
-                  
-                  history.innerHTML += '<br/>--------------------------------&emsp; ' + i +' &emsp;--------------------------------';
-                  
-                  history.innerHTML += '<br/><span class="resultCode">Minifigure Data Matrix: <span style="color:green;font-weight:bold;background-color:#ffffff">' + scannedData.substring(0, 7) + "</span></span>";
-                  console.log('Decoded: ' + result.text + " --> " + scannedData);
-                  displayCharacter(scannedData.substring(0, 7))
-                  codeReader.reset();
-                  previewHolder.style.display = 'none';
-                  startButton.style.display = 'block';
-               }
-               if (err && !(err instanceof ZXing.NotFoundException)) {
-                  console.error(err);
-                  history.innerHTML += 'Error: ' + err;
-                  startButton.style.display = 'block';
-               }
+            })
+            .catch((err) => {
+               console.error(err);
             });
-         
-            console.log(`Started continuous decode from camera with id ${selectedDeviceId}`);
-            previewHolder.style.display = 'block';
+      });
+
+      function startScanning() {
+         const codeReader = new ZXing.BrowserMultiFormatReader();
+         const formatsToRecognize = [ZXing.BarcodeFormat.DATA_MATRIX];
+         if (flag == false) {
+            clearcontent('history');
          }
-         
-        function displayCharacter(dataMatrix){
-            var character = characters[dataMatrix];
-            if (character) {			
-                resultDiv.id = "resultDiv" ;
-                resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
-                res.innerHTML = character.name;
-                history.append(resultDiv); 
+         codeReader.formats = formatsToRecognize;
+         startButton.style.display = 'none';
 
-                resultImage.id = "resultImage";
-                resultImage.style.backgroundImage = "url(" + character.link + ")";
-                history.append(resultImage);							
+         codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, (result, err) => {
+            if (result && formatsToRecognize.includes(result.format)) {
+               const scannedData = result.text;
 
+               history.innerHTML += '<br/>--------------------------------&emsp; ' + i + ' &emsp;--------------------------------';
+
+               history.innerHTML += '<br/><span class="resultCode">Minifigure Data Matrix: <span style="color:green;font-weight:bold;background-color:#ffffff">' + scannedData.substring(0, 7) + "</span></span>";
+               //console.log('Decoded: ' + result.text + " --> " + scannedData);
+               displayCharacter(scannedData.substring(0, 7))
+               codeReader.reset();
+               previewHolder.style.display = 'none';
+               startButton.style.display = 'block';
             }
-            else {
-               history.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code: </span>';
+            if (err && !(err instanceof ZXing.NotFoundException)) {
+               console.error(err);
+               history.innerHTML += 'Error: ' + err;
+               startButton.style.display = 'block';
             }
-            i++;
-        }
-      </script>
-   </body>
+         });
+
+         //console.log(`Started continuous decode from camera with id ${selectedDeviceId}`);
+         previewHolder.style.display = 'block';
+      }
+
+      function displayCharacter(dataMatrix) {
+         var character = characters[dataMatrix];
+         if (character) {
+            resultDiv.id = "resultDiv";
+            resultDiv.innerHTML = '<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
+            res.innerHTML = character.name;
+            history.append(resultDiv);
+
+            resultImage.id = "resultImage";
+            resultImage.style.backgroundImage = "url(" + character.link + ")";
+            history.append(resultImage);
+
+         }
+         else {
+            history.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code: </span>';
+         }
+         i++;
+      }
+   </script>
+</body>
+
 </html>
