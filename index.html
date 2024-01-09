@@ -61,6 +61,11 @@
          top: 0;
          left: 0;
          }
+	 #res{
+         border-left-style: solid;
+         border-color: #2196F3;
+         background: #DDFFFF;
+         }
          #history {
          font-size: 18px;
          margin-top: 20px;
@@ -77,11 +82,11 @@
          border: none;
          cursor: pointer;
          margin: 0 auto;
-		font-weight: bold;
+	 font-weight: bold;
          font-size: 23px;
          width: 60%;
-		border-radius: 12px;
-		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+	 border-radius: 12px;
+	 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
          }
          #resultImage {
          width: 300px;
@@ -125,7 +130,7 @@
 	<div><strong>Farhan's Minifigures Hunt (Series 25)</strong> <br> <br></div>
         <div id="logo"><img src="https://images.brickset.com/sets/large/71045-13.jpg"></div>
     
-         <div id="text">Find which Minifigure is inside the box of series 25!</div>
+         <div id="res">Find which Minifigure is inside the box of series 25!</div>
          <img src="img/qrcodesstyle.png" alt="" class="descimage" />
          <div id="preview-holder">
             <video id="preview"></video>
@@ -146,6 +151,7 @@
          const resultDiv = document.createElement("div");
          const resultImage = document.createElement('div'); 
          const history = document.getElementById('history');
+	 const res = document.getElementById('res');
          const previewHolder = document.getElementById('preview-holder');
          let selectedDeviceId;
          let i = 1;
@@ -237,6 +243,7 @@
             if (character) {			
 		resultDiv.id = "resultDiv" ;
 		resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
+		res.innerHTML = character.name;
 		history.append(resultDiv); 
 				   
 		resultImage.id = "resultImage";
