@@ -11,10 +11,10 @@
    <meta property="og:description" content="Find Minifigures">
 
    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
+      @import url('https://fonts.googleapis.com/css2?family=Salsa&display=swap');
       * {
          box-sizing: border-box;
+         font-family: 'Salsa', cursive;
       }
 
       body {
@@ -22,7 +22,6 @@
          padding: 0;
          background: #ffffff;
          color: #000000;
-         font-family: 'Roboto', sans-serif;
          font-size: 16px;
          line-height: 24px;
       }
@@ -202,6 +201,17 @@
       .slider.round:before {
          border-radius: 50%;
       }
+      
+      .blink_me {
+		  animation: blinker 0.5s linear infinite;
+		  color: red;
+		}
+
+		@keyframes blinker {
+		  50% {
+			opacity: 0;
+		  }
+		}
    </style>
 
 </head>
@@ -237,7 +247,6 @@
       const resultDiv = document.createElement("div");
       const resultImage = document.createElement('div');
       const history = document.getElementById('history');
-
       const res = document.getElementById('res');
       const previewHolder = document.getElementById('preview-holder');
       let selectedDeviceId;
@@ -259,6 +268,7 @@
       }
 
       const characters = {
+         //US codes
          "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
          "6471969": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
          "6471970": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
@@ -271,7 +281,7 @@
          "6471964": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
          "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
          "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' },
-
+         // EU codes
          "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
          "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
          "6472871": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
@@ -347,7 +357,7 @@
          if (character) {
             resultDiv.id = "resultDiv";
             resultDiv.innerHTML = '<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
-            res.innerHTML = character.name;
+            res.innerHTML = '<span class="blink_me">' + character.name + '</span>';
             history.append(resultDiv);
 
             resultImage.id = "resultImage";
