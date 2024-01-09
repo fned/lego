@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="author" content="">
       <meta name="description" content="Find Minifigure">
-      <title>Well hello there :D</title>
+      <title>Well hello there...</title>
       <meta property="og:title" content="Find Minifigure">
       <meta property="og:description" content="Find Minifigures">
       
@@ -61,7 +61,7 @@
          top: 0;
          left: 0;
          }
-	 #res{
+         #res{
          border-left-style: solid;
          border-color: #2196F3;
          background: #DDFFFF;
@@ -82,11 +82,11 @@
          border: none;
          cursor: pointer;
          margin: 0 auto;
-	 font-weight: bold;
+		    font-weight: bold;
          font-size: 23px;
          width: 60%;
-	 border-radius: 12px;
-	 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		    border-radius: 12px;
+		    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
          }
          #resultImage {
          width: 300px;
@@ -121,13 +121,72 @@
          text-decoration: none;
          color: #007BFF;
          }
-		
+     
+        .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+        }
+
+      .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+		.slider {
+		  position: absolute;
+		  cursor: pointer;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-color: #ccc;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+
+		.slider:before {
+		  position: absolute;
+		  content: "";
+		  height: 26px;
+		  width: 26px;
+		  left: 4px;
+		  bottom: 4px;
+		  background-color: white;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+
+		input:checked + .slider {
+		  background-color: #2196F3;
+		}
+
+		input:focus + .slider {
+		  box-shadow: 0 0 1px #2196F3;
+		}
+
+		input:checked + .slider:before {
+		  -webkit-transform: translateX(26px);
+		  -ms-transform: translateX(26px);
+		  transform: translateX(26px);
+		}
+
+		/* Rounded sliders */
+		.slider.round {
+		  border-radius: 34px;
+		}
+
+		.slider.round:before {
+		  border-radius: 50%;
+		}
       </style>
      
    </head>
-   <body>
+    <body>
       <div id="wrapper">
-	<div><strong>Farhan's Minifigures Hunt (Series 25)</strong> <br> <br></div>
+		<div><strong>Farhan's Minifigures Hunt (Series 25)</strong> <br> <br></div>
         <div id="logo"><img src="https://images.brickset.com/sets/large/71045-13.jpg"></div>
     
          <div id="res">Find which Minifigure is inside the box of series 25!</div>
@@ -136,7 +195,12 @@
             <video id="preview"></video>
          </div>
          <button id="startButton">Scan Minifigure box Data Matrix</button>
-         
+         <div style="font-size:18px"><br> History mode: 
+        	<label class="switch">
+				<input id ="cbox" type="checkbox" onchange="toggleCheckbox(this)" checked>
+				<span class="slider round"></span>
+			</label>
+		</div>
 	<div id="history"></div>
       </div>
       
@@ -151,11 +215,28 @@
          const resultDiv = document.createElement("div");
          const resultImage = document.createElement('div'); 
          const history = document.getElementById('history');
-	 const res = document.getElementById('res');
+
+	      const res = document.getElementById('res');
          const previewHolder = document.getElementById('preview-holder');
          let selectedDeviceId;
          let i = 1;
-        
+         let flag = document.getElementById("cbox").checked;
+         
+        function toggleCheckbox(element)
+         {
+           //element.checked = !element.checked;
+           flag = element.checked;
+           console.log('Toggle: ' + element.checked);
+           console.log('flag: ' + flag);
+         }
+		 
+		 
+        function clearcontent(elementID) { 
+            document.getElementById(elementID).innerHTML = ""; 
+            console.log('clearcontent: ' + elementID);
+            i = 1;
+        } 
+
          const characters = {
             "6471965": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6471969": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
@@ -170,7 +251,7 @@
             "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
             "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' },
 
-	    "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
+			      "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
             "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
             "6472871": { name: 'Vampire knight', link: 'https://images.brickset.com/sets/large/71045-3.jpg' },
             "6472867": { name: 'Sprinter', link: 'https://images.brickset.com/sets/large/71045-4.jpg' },
@@ -210,7 +291,8 @@
          function startScanning() {
             const codeReader = new ZXing.BrowserMultiFormatReader();
             const formatsToRecognize = [ZXing.BarcodeFormat.DATA_MATRIX];
-         
+		if(flag == false){clearcontent('history');
+		}
             codeReader.formats = formatsToRecognize;
             startButton.style.display = 'none';
            
@@ -241,14 +323,15 @@
         function displayCharacter(dataMatrix){
             var character = characters[dataMatrix];
             if (character) {			
-		resultDiv.id = "resultDiv" ;
-		resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
-		res.innerHTML = character.name;
-		history.append(resultDiv); 
-				   
-		resultImage.id = "resultImage";
-		resultImage.style.backgroundImage = "url(" + character.link + ")";
-		history.append(resultImage);			
+                resultDiv.id = "resultDiv" ;
+                resultDiv.innerHTML ='<span class="resultFig">This box has: <span style="color:green;font-weight:bold;background-color:#ffffff">' + character.name + '</span></span>';
+                res.innerHTML = character.name;
+                history.append(resultDiv); 
+
+                resultImage.id = "resultImage";
+                resultImage.style.backgroundImage = "url(" + character.link + ")";
+                history.append(resultImage);							
+
             }
             else {
                history.innerHTML += '<br/><span class="resultFig resultFigError">This is an unknown code: </span>';
