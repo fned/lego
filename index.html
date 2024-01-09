@@ -12,6 +12,7 @@
 
    <style>
       @import url('https://fonts.googleapis.com/css2?family=Salsa&display=swap');
+
       * {
          box-sizing: border-box;
          font-family: 'Salsa', cursive;
@@ -201,17 +202,17 @@
       .slider.round:before {
          border-radius: 50%;
       }
-      
-      .blink_me {
-		  animation: blinker 0.5s linear infinite;
-		  color: red;
-		}
 
-		@keyframes blinker {
-		  50% {
-			opacity: 0;
-		  }
-		}
+      .blink_me {
+         animation: blinker 0.5s linear infinite;
+         color: red;
+      }
+
+      @keyframes blinker {
+         50% {
+            opacity: 0;
+         }
+      }
    </style>
 
 </head>
@@ -282,6 +283,7 @@
          "6471964": { name: 'Train Kid', link: 'https://images.brickset.com/sets/large/71045-10.jpg' },
          "6471959": { name: 'Fierce Barbarian', link: 'https://images.brickset.com/sets/large/71045-11.jpg' },
          "6471967": { name: 'Pet Groomer', link: 'https://images.brickset.com/sets/large/71045-12.jpg' },
+         
          // EU codes
          "6472866": { name: 'Film Noir Detective', link: 'https://images.brickset.com/sets/large/71045-1.jpg' },
          "6472870": { name: 'E-Sports Gamer', link: 'https://images.brickset.com/sets/large/71045-2.jpg' },
@@ -333,7 +335,7 @@
             if (result && formatsToRecognize.includes(result.format)) {
                const scannedData = result.text;
 
-               history.innerHTML += '<br/>-------------------&emsp; ' + i +' &emsp;-------------------';
+               history.innerHTML += '-------------------&emsp; ' + i + ' &emsp;-------------------';
 
                history.innerHTML += '<br/><span class="resultCode">Minifigure Data Matrix: <span style="color:green;font-weight:bold;background-color:#ffffff">' + scannedData.substring(0, 7) + "</span></span>";
                //console.log('Decoded: ' + result.text + " --> " + scannedData);
